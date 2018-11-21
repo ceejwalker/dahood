@@ -1,0 +1,40 @@
+{
+  "name": "dahood",
+  "version": "1.0.0",
+  "description": "A modular backend system",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceejwalker/dahood.git"
+  },
+  "keywords": [
+    "backend",
+    "node",
+    "mongo",
+    "hapi"
+  ],
+  "author": "Ceej Walker",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/ceejwalker/dahood/issues"
+  },
+  "homepage": "https://github.com/ceejwalker/dahood#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "hapi": "^17.7.0",
+    "mongoose": "^5.3.13",
+    "nodemon": "^1.18.6"
+  }
+}
