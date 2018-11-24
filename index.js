@@ -1,14 +1,32 @@
+// Imports
 const hapi = require('hapi')
 const mongoose = require('mongoose')
 const Painting = require('./models/Painting')
 const chalk = require('chalk')
+const { graphqlHapi, graphiqlHapi } = require('apollo-server-hapi')
+const schema = require('./graphql/schema')
 
+// Server creation and options
 const server = hapi.Server({
   port: 4000,
   host: 'localhost'
 })
 
+// Server logic
 const init = async () => {
+
+  // Plugins
+  await server.register({
+    plugin: graphiqlHapi,
+    options: {
+      path: '/graphiql',
+      graphiqlOptions: {
+        endpointURL: '/gql'
+      }
+    }
+  })
+
+  // Routes
   server.route([
     {
       method: 'GET',
@@ -41,14 +59,21 @@ const init = async () => {
       }
     }
   ])
-  await server.start()
-  console.log(`Server running at: ${server.info.uri}`)
 
-  // Should connect to database
+  // starts the server
+  try {
+    await server.start()
+    console.log(`Server running at: ${server.info.uri}`)
+  } catch (err) {
+    console.log(`Error while starting server: ${err.message}`)
+  }
+
+  // Connects to existing mongo db
   mongoose.connect('mongodb://localhost:27017/dahood').then(
     () => { console.log(chalk.blue('Mongoose sniffed out the database!')) },
     err => { console.log(chalk.red(err)) }
   )
 }
 
+// Triggers the init
 init()
